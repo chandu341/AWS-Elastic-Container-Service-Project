@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0c1528">
+    <meta name="description" content="A polished container service dashboard demo, ready to run in Docker and deploy to Amazon ECS.">
+    <title>Northstar | Container dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <a class="brand" href="#overview" aria-label="Northstar home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32"><path d="M16 2.8 19.5 12.5 29.2 16l-9.7 3.5L16 29.2l-3.5-9.7L2.8 16l9.7-3.5L16 2.8Z"/><circle cx="16" cy="16" r="3.2"/></svg>
+          </span>
+          <span class="brand-name">northstar<span>.</span><small>CONTAINER CLOUD</small></span>
+        </a>
+
+        <div class="workspace-picker">
+          <span class="workspace-avatar">A</span>
+          <span class="workspace-copy"><strong>Acme Studio</strong><small>Production workspace</small></span>
+          <svg class="chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+        </div>
+
+        <div class="nav-label">WORKSPACE</div>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a class="nav-link active" href="#overview">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="2.5" width="6" height="6" rx="1.5"/><rect x="11.5" y="2.5" width="6" height="6" rx="1.5"/><rect x="2.5" y="11.5" width="6" height="6" rx="1.5"/><rect x="11.5" y="11.5" width="6" height="6" rx="1.5"/></svg>
+            Overview
+          </a>
+          <a class="nav-link" href="#services">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m10 2.5 7 4v7l-7 4-7-4v-7l7-4Z"/><path d="m3.4 6.7 6.6 3.8 6.6-3.8M10 10.5v7"/></svg>
+            Services <span class="nav-count">6</span>
+          </a>
+          <a class="nav-link" href="#activity">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15.5V10m4.7 5.5V5m4.6 10.5v-8m4.7 8V3"/></svg>
+            Monitoring
+          </a>
+          <a class="nav-link" href="#activity">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 3.5h12v13H4z"/><path d="M7 7h6M7 10h6m-6 3h3"/></svg>
+            Deployments
+          </a>
+        </nav>
+
+        <div class="nav-label nav-label-spaced">MANAGE</div>
+        <nav class="main-nav" aria-label="Management navigation">
+          <a class="nav-link" href="#services">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5 16.5 6v8L10 17.5 3.5 14V6L10 2.5Z"/><circle cx="10" cy="10" r="2.5"/></svg>
+            Clusters
+          </a>
+          <a class="nav-link" href="#resources">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14"/><circle cx="6" cy="5.5" r="1.5"/><circle cx="13" cy="10" r="1.5"/><circle cx="8" cy="14.5" r="1.5"/></svg>
+            Infrastructure
+          </a>
+          <a class="nav-link" href="#activity">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5 12 7l4.8.5-3.6 3.2 1 4.8-4.2-2.4-4.2 2.4 1-4.8-3.6-3.2L8 7l2-4.5Z"/></svg>
+            Settings
+          </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="help-card">
+            <span class="help-icon">✦</span>
+            <strong>Need a hand?</strong>
+            <p>Explore the quick-start guide and ship with confidence.</p>
+            <a href="#getting-started">Open the guide <span aria-hidden="true">↗</span></a>
+          </div>
+          <button class="profile-button" type="button">
+            <span class="profile-avatar">C</span>
+            <span class="profile-copy"><strong>Chandu</strong><small>Cloud engineer</small></span>
+            <span class="profile-dots" aria-hidden="true">···</span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main-content" id="overview">
+        <header class="topbar">
+          <button class="icon-button menu-toggle" id="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+          </button>
+          <div class="breadcrumbs"><span>Workspace</span><span class="crumb-slash">/</span><strong>Overview</strong></div>
+          <div class="topbar-actions">
+            <span class="region-chip"><span class="region-dot"></span> Asia Pacific (Mumbai) <span class="region-code">ap-south-1</span></span>
+            <button class="icon-button notification-button" type="button" aria-label="Notifications">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M15.5 8a5.5 5.5 0 0 0-11 0c0 6-2 6-2 7.5h15C17.5 14 15.5 14 15.5 8ZM8 18h4"/></svg>
+              <span class="notification-dot"></span>
+            </button>
+            <span class="topbar-avatar">C</span>
+          </div>
+        </header>
+
+        <div class="page-wrap">
+          <section class="welcome-row">
+            <div>
+              <div class="date-label"><span class="sun-icon">☼</span> <span id="dashboard-date"></span></div>
+              <h1><span id="greeting">Good morning</span>, Chandu <span class="wave">✳</span></h1>
+              <p class="welcome-copy">Here’s what’s happening across your container environment.</p>
+            </div>
+            <div class="welcome-actions">
+              <button class="button button-secondary" id="refresh-button" type="button">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16.5 8A6.7 6.7 0 0 0 4.7 5.5L3 7.2"/><path d="M3 3.5v3.8h3.8M3.5 12a6.7 6.7 0 0 0 11.8 2.5l1.7-1.7"/><path d="M17 16.5v-3.8h-3.8"/></svg>
+                <span id="refresh-label">Refresh</span>
+              </button>
+              <button class="button button-primary" id="deploy-button" type="button">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v14M3 10h14"/></svg>
+                New deployment
+              </button>
+            </div>
+          </section>
+
+          <section class="hero-banner" aria-label="Environment summary">
+            <div class="hero-copy">
+              <span class="hero-kicker"><span class="live-pulse"></span> ALL SYSTEMS OPERATIONAL</span>
+              <h2>Your infrastructure,<br>in perfect <span>orbit.</span></h2>
+              <p>Your production environment is healthy. All services are running smoothly across your cluster.</p>
+              <a class="hero-link" href="#services">Explore your services <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div>
+              <span class="planet planet-main"></span><span class="planet planet-small"></span>
+              <span class="star star-one">✦</span><span class="star star-two">✧</span><span class="star star-three">·</span>
+              <div class="art-caption"><span class="art-caption-dot"></span> production-cluster <span>●</span></div>
+            </div>
+            <div class="hero-decoration decoration-one"></div><div class="hero-decoration decoration-two"></div>
+          </section>
+
+          <section class="metrics-grid" aria-label="Cluster metrics">
+            <article class="metric-card">
+              <div class="metric-heading"><span>Running services</span><span class="metric-icon icon-violet"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m10 2.5 7 4v7l-7 4-7-4v-7l7-4Z"/><path d="m3.5 6.7 6.5 3.8 6.5-3.8M10 10.5v7"/></svg></span></div>
+              <div class="metric-value">12 <span class="metric-total">/ 12</span></div>
+              <div class="metric-foot"><span class="trend trend-good">↗ 2</span><span>from last week</span><span class="metric-spark spark-purple" aria-hidden="true"></span></div>
+            </article>
+            <article class="metric-card">
+              <div class="metric-heading"><span>Healthy tasks</span><span class="metric-icon icon-green"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10 4 4 8-8"/><circle cx="10" cy="10" r="8"/></svg></span></div>
+              <div class="metric-value">48 <span class="metric-total">/ 48</span></div>
+              <div class="metric-foot"><span class="trend trend-good">100%</span><span>task health</span><span class="metric-spark spark-green" aria-hidden="true"></span></div>
+            </article>
+            <article class="metric-card">
+              <div class="metric-heading"><span>CPU utilization</span><span class="metric-icon icon-blue"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 14.5 7 10l3 2.5 6-7"/><path d="M12 5.5h4v4"/></svg></span></div>
+              <div class="metric-value">34<span class="metric-unit">%</span></div>
+              <div class="metric-foot"><span class="trend trend-good">↓ 4.2%</span><span>vs. last hour</span><span class="metric-spark spark-blue" aria-hidden="true"></span></div>
+            </article>
+            <article class="metric-card">
+              <div class="metric-heading"><span>Monthly spend</span><span class="metric-icon icon-orange"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5v15M14 6H8a2.5 2.5 0 0 0 0 5h4a2.5 2.5 0 0 1 0 5H5"/></svg></span></div>
+              <div class="metric-value"><span class="currency">$</span>2,480<span class="metric-decimal">.60</span></div>
+              <div class="metric-foot"><span class="trend trend-warn">↗ 8.1%</span><span>vs. last month</span><span class="metric-spark spark-orange" aria-hidden="true"></span></div>
+            </article>
+          </section>
+
+          <section class="content-grid" id="resources">
+            <article class="panel usage-panel">
+              <div class="panel-header">
+                <div><h2>Resource utilization</h2><p>Monitor your cluster performance over time</p></div>
+                <div class="range-switch" role="group" aria-label="Chart time range">
+                  <button class="range-button" type="button" data-range="1h">1H</button>
+                  <button class="range-button active" type="button" data-range="6h">6H</button>
+                  <button class="range-button" type="button" data-range="24h">24H</button>
+                  <button class="range-button" type="button" data-range="7d">7D</button>
+                </div>
+              </div>
+              <div class="chart-legend"><span><i class="legend-dot cpu-dot"></i> CPU</span><span><i class="legend-dot memory-dot"></i> Memory</span><span class="chart-period" id="chart-period">Last 6 hours</span></div>
+              <div class="chart-wrap">
+                <div class="chart-y-labels"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div>
+                <div class="chart-area">
+                  <div class="chart-grid-lines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+                  <svg class="usage-chart" viewBox="0 0 720 210" preserveAspectRatio="none" role="img" aria-label="CPU and memory utilization line chart">
+                    <defs>
+                      <linearGradient id="cpu-fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#7967f8" stop-opacity=".19"/><stop offset="100%" stop-color="#7967f8" stop-opacity="0"/></linearGradient>
+                      <linearGradient id="memory-fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#37c9b0" stop-opacity=".12"/><stop offset="100%" stop-color="#37c9b0" stop-opacity="0"/></linearGradient>
+                    </defs>
+                    <path id="cpu-fill-path" class="chart-fill" d="M0 136 C35 130 50 145 82 125 S130 119 158 128 S205 113 240 118 S286 104 320 113 S365 96 402 105 S444 91 480 100 S520 87 558 94 S600 74 638 84 S684 65 720 73 V210 H0Z"/>
+                    <path id="memory-fill-path" class="chart-fill" d="M0 99 C42 105 48 93 82 98 S127 88 158 94 S208 82 240 89 S284 72 320 80 S367 70 402 77 S444 59 480 69 S519 56 558 62 S603 48 638 54 S686 40 720 47 V210 H0Z"/>
+                    <path id="cpu-line" class="chart-line cpu-line" d="M0 136 C35 130 50 145 82 125 S130 119 158 128 S205 113 240 118 S286 104 320 113 S365 96 402 105 S444 91 480 100 S520 87 558 94 S600 74 638 84 S684 65 720 73"/>
+                    <path id="memory-line" class="chart-line memory-line" d="M0 99 C42 105 48 93 82 98 S127 88 158 94 S208 82 240 89 S284 72 320 80 S367 70 402 77 S444 59 480 69 S519 56 558 62 S603 48 638 54 S686 40 720 47"/>
+                    <circle id="chart-point" class="chart-point" cx="720" cy="73" r="5"/>
+                  </svg>
+                  <div class="chart-x-labels" id="chart-x-labels"><span>09:00</span><span>10:00</span><span>11:00</span><span>12:00</span><span>13:00</span><span>14:00</span><span>15:00</span></div>
+                </div>
+              </div>
+              <div class="chart-footer"><span><span class="live-pulse live-pulse-light"></span> Live metrics</span><span>Updated <strong id="updated-time">just now</strong></span></div>
+            </article>
+
+            <article class="panel cluster-panel">
+              <div class="panel-header"><div><h2>Cluster health</h2><p>Production environment</p></div><button class="more-button" type="button" aria-label="More cluster options">···</button></div>
+              <div class="cluster-score">
+                <div class="health-ring"><div class="health-ring-inner"><strong>98</strong><span>HEALTH</span></div></div>
+                <div class="health-summary"><span class="health-pill"><i></i> Excellent</span><p>Everything is running<br>within normal parameters.</p></div>
+              </div>
+              <div class="health-list">
+                <div><span><i class="health-status-dot green-dot"></i> Service availability</span><strong>100%</strong></div>
+                <div><span><i class="health-status-dot blue-dot"></i> Task placement</span><strong>Optimal</strong></div>
+                <div><span><i class="health-status-dot violet-dot"></i> Active deployments</span><strong>2</strong></div>
+              </div>
+              <a class="text-link" href="#services">View cluster details <span aria-hidden="true">→</span></a>
+            </article>
+          </section>
+
+          <section class="panel services-panel" id="services">
+            <div class="panel-header services-header">
+              <div><h2>Active services <span class="section-count">6</span></h2><p>Your running containerized applications</p></div>
+              <div class="services-tools">
+                <label class="search-box">
+                  <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8"/><path d="m13.2 13.2 4 4"/></svg>
+                  <input id="service-search" type="search" placeholder="Search services..." aria-label="Search services">
+                </label>
+                <button class="button button-secondary button-small" id="filter-button" type="button">
+                  <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M5.5 10h9M8 15h4"/></svg>
+                  Filters
+                  <span class="filter-count" id="filter-count" hidden>1</span>
+                </button>
+              </div>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>SERVICE</th><th>STATUS</th><th>TASKS</th><th>CPU / MEMORY</th><th>LAST DEPLOYED</th><th><span class="sr-only">Actions</span></th></tr></thead>
+                <tbody id="service-rows">
+                  <tr data-status="healthy"><td><div class="service-name"><span class="service-symbol symbol-indigo">✳</span><span><strong>web-frontend</strong><small>Fargate · Linux/x86_64</small></span></div></td><td><span class="status-pill healthy-pill"><i></i> Healthy</span></td><td><strong>8</strong><span class="task-sub"> / 8</span></td><td><div class="resource-cell"><span><i class="mini-dot cpu-mini"></i> 28%</span><span><i class="mini-dot memory-mini"></i> 62%</span></div></td><td><span class="deployed-time">12 min ago</span></td><td><button class="row-menu" type="button" aria-label="web-frontend actions">···</button></td></tr>
+                  <tr data-status="healthy"><td><div class="service-name"><span class="service-symbol symbol-cyan">⌘</span><span><strong>api-gateway</strong><small>Fargate · Linux/x86_64</small></span></div></td><td><span class="status-pill healthy-pill"><i></i> Healthy</span></td><td><strong>12</strong><span class="task-sub"> / 12</span></td><td><div class="resource-cell"><span><i class="mini-dot cpu-mini"></i> 41%</span><span><i class="mini-dot memory-mini"></i> 54%</span></div></td><td><span class="deployed-time">38 min ago</span></td><td><button class="row-menu" type="button" aria-label="api-gateway actions">···</button></td></tr>
+                  <tr data-status="healthy"><td><div class="service-name"><span class="service-symbol symbol-orange">⌁</span><span><strong>worker-queue</strong><small>Fargate · Linux/ARM64</small></span></div></td><td><span class="status-pill healthy-pill"><i></i> Healthy</span></td><td><strong>16</strong><span class="task-sub"> / 16</span></td><td><div class="resource-cell"><span><i class="mini-dot cpu-mini"></i> 19%</span><span><i class="mini-dot memory-mini"></i> 47%</span></div></td><td><span class="deployed-time">2 hours ago</span></td><td><button class="row-menu" type="button" aria-label="worker-queue actions">···</button></td></tr>
+                  <tr data-status="deploying"><td><div class="service-name"><span class="service-symbol symbol-pink">◈</span><span><strong>events-processor</strong><small>Fargate · Linux/x86_64</small></span></div></td><td><span class="status-pill deploying-pill"><i></i> Deploying</span></td><td><strong>6</strong><span class="task-sub"> / 8</span></td><td><div class="resource-cell"><span><i class="mini-dot cpu-mini"></i> 36%</span><span><i class="mini-dot memory-mini"></i> 71%</span></div></td><td><span class="deployed-time">Deploying now</span></td><td><button class="row-menu" type="button" aria-label="events-processor actions">···</button></td></tr>
+                  <tr data-status="healthy"><td><div class="service-name"><span class="service-symbol symbol-cyan">◎</span><span><strong>auth-service</strong><small>Fargate · Linux/x86_64</small></span></div></td><td><span class="status-pill healthy-pill"><i></i> Healthy</span></td><td><strong>4</strong><span class="task-sub"> / 4</span></td><td><div class="resource-cell"><span><i class="mini-dot cpu-mini"></i> 22%</span><span><i class="mini-dot memory-mini"></i> 39%</span></div></td><td><span class="deployed-time">Yesterday</span></td><td><button class="row-menu" type="button" aria-label="auth-service actions">···</button></td></tr>
+                  <tr data-status="healthy"><td><div class="service-name"><span class="service-symbol symbol-indigo">◇</span><span><strong>image-resizer</strong><small>Fargate · Linux/ARM64</small></span></div></td><td><span class="status-pill healthy-pill"><i></i> Healthy</span></td><td><strong>2</strong><span class="task-sub"> / 2</span></td><td><div class="resource-cell"><span><i class="mini-dot cpu-mini"></i> 17%</span><span><i class="mini-dot memory-mini"></i> 43%</span></div></td><td><span class="deployed-time">2 days ago</span></td><td><button class="row-menu" type="button" aria-label="image-resizer actions">···</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-footer"><span>Showing <strong id="service-result-count">6</strong> of 6 services <span class="demo-note">· Demo data</span></span><a href="#services">View all services <span aria-hidden="true">→</span></a></div>
+          </section>
+
+          <section class="bottom-grid" id="activity">
+            <article class="panel activity-panel">
+              <div class="panel-header"><div><h2>Recent activity</h2><p>Latest events across your environment</p></div><a class="subtle-link" href="#activity">View activity</a></div>
+              <div class="activity-list">
+                <div class="activity-item"><span class="activity-icon activity-deploy"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v14M3 10h14"/></svg></span><div><strong>Deployment started</strong><p><b>events-processor</b> · Revision 42 is rolling out</p></div><time>2 min ago</time></div>
+                <div class="activity-item"><span class="activity-icon activity-scale"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 15V5m-4 4 4-4 4 4"/></svg></span><div><strong>Service scaled up</strong><p><b>web-frontend</b> · Desired count changed to 8</p></div><time>18 min ago</time></div>
+                <div class="activity-item"><span class="activity-icon activity-check"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10 4 4 8-8"/></svg></span><div><strong>Deployment completed</strong><p><b>api-gateway</b> · Revision 106 is healthy</p></div><time>38 min ago</time></div>
+              </div>
+            </article>
+            <article class="panel getting-started" id="getting-started">
+              <div class="getting-started-top"><span class="rocket-icon">↗</span><span class="checklist-label">QUICK START</span><span class="checklist-progress">3/4 complete</span></div>
+              <h2>Ready for takeoff?</h2>
+              <p>You’re one step away from a fully production-ready setup.</p>
+              <div class="progress-track"><span></span></div>
+              <div class="checklist-item"><span class="check-circle checked">✓</span> Create your first cluster</div>
+              <div class="checklist-item"><span class="check-circle checked">✓</span> Deploy a container service</div>
+              <div class="checklist-item"><span class="check-circle checked">✓</span> Configure service scaling</div>
+              <div class="checklist-item"><span class="check-circle"></span> Set up an alert policy</div>
+              <a class="text-link" href="#getting-started">Complete setup <span aria-hidden="true">→</span></a>
+            </article>
+          </section>
+
+          <footer class="page-footer"><span>© 2026 Northstar Cloud <span class="footer-separator">·</span> Dashboard preview with sample data</span><span><span class="footer-live-dot"></span> All systems operational</span></footer>
+        </div>
+      </main>
+    </div>
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <dialog class="demo-dialog" id="deploy-dialog">
+      <form method="dialog">
+        <button class="dialog-close" aria-label="Close dialog">×</button>
+        <span class="dialog-icon">↗</span>
+        <p class="dialog-eyebrow">DEMO DASHBOARD</p>
+        <h2>Ready to deploy?</h2>
+        <p>This is a visual demo with sample data. Connect an ECS API or deployment pipeline to launch a real service.</p>
+        <button class="button button-primary dialog-action">Got it</button>
+      </form>
+    </dialog>
+  </body>
+</html>
